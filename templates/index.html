@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Druk AI – Dzongkha assistant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Tibetan:wght@400;600&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/chat.css') }}">
+</head>
+<body>
+  <header class="top">
+    <div class="brand">
+      <h1>Druk AI</h1>
+      <p>A Dzongkha-first assistant. Ask in English or Dzongkha; answers come in Dzongkha.</p>
+    </div>
+    <div class="controls">
+      <label class="switch"><input type="checkbox" id="toggle-translation"> <span>Show English Translation</span></label>
+      <label class="switch"><input type="checkbox" id="toggle-verify"> <span>Self-review answers</span></label>
+      <button type="button" id="clear-btn" class="ghost">Clear chat</button>
+    </div>
+  </header>
+  <div class="band" aria-hidden="true"></div>
+
+  <main>
+    <section id="chat" class="chat" aria-live="polite" aria-label="Conversation">
+      <div class="msg assistant welcome">
+        <div class="label">Druk AI</div>
+        <div class="dz" lang="dz">ཀུ་ཟུ་ཟང་པོ་ལགས། ངས་ཁྱེད་ལུ་ག་དེ་སྦེ་རོགས་རམ་འབད་ནི་སྨོ།</div>
+        <div class="en">Hello! Ask me anything in English or Dzongkha. AI-written Dzongkha can contain mistakes, so please have important text checked by a fluent speaker.</div>
+      </div>
+      <div class="examples" id="examples">
+        <button type="button" class="chip">What is the capital of Bhutan?</button>
+        <button type="button" class="chip">Explain machine learning in simple Dzongkha.</button>
+        <button type="button" class="chip">Translate "good luck on your exam" into Dzongkha.</button>
+        <button type="button" class="chip">ཀུ་ཟུ་ཟང་པོ་ལགས།</button>
+      </div>
+    </section>
+  </main>
+
+  <div id="status" class="status" role="status" hidden>Druk AI is writing…</div>
+  <div id="error" class="error" role="alert" hidden></div>
+
+  <form id="composer" class="composer" autocomplete="off">
+    <label for="input" class="sr">Your message</label>
+    <textarea id="input" rows="2" maxlength="{{ max_chars }}" placeholder="Type in English or Dzongkha… (Enter to send, Shift+Enter for a new line)"></textarea>
+    <button type="submit" id="send-btn">Send</button>
+  </form>
+  <script type="module" src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
